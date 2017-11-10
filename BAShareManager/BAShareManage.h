@@ -1,66 +1,5 @@
 
 /*!
- *  @header BAKit.h
- *          BABaseProject
- *
- *  @brief  BAKit
- *
- *  @author 博爱
- *  @copyright    Copyright © 2016年 博爱. All rights reserved.
- *  @version    V1.0
- */
-
-//                            _ooOoo_
-//                           o8888888o
-//                           88" . "88
-//                           (| -_- |)
-//                            O\ = /O
-//                        ____/`---'\____
-//                      .   ' \\| |// `.
-//                       / \\||| : |||// \
-//                     / _||||| -:- |||||- \
-//                       | | \\\ - /// | |
-//                     | \_| ''\---/'' | |
-//                      \ .-\__ `-` ___/-. /
-//                   ___`. .' /--.--\ `. . __
-//                ."" '< `.___\_<|>_/___.' >'"".
-//               | | : `- \`.;`\ _ /`;.`/ - ` : | |
-//                 \ \ `-. \_ __\ /__ _/ .-` / /
-//         ======`-.____`-.___\_____/___.-`____.-'======
-//                            `=---='
-//
-//         .............................................
-//                  佛祖镇楼                  BUG辟易
-//          佛曰:
-//                  写字楼里写字间，写字间里程序员；
-//                  程序人员写程序，又拿程序换酒钱。
-//                  酒醒只在网上坐，酒醉还来网下眠；
-//                  酒醉酒醒日复日，网上网下年复年。
-//                  但愿老死电脑间，不愿鞠躬老板前；
-//                  奔驰宝马贵者趣，公交自行程序员。
-//                  别人笑我忒疯癫，我笑自己命太贱；
-//                  不见满街漂亮妹，哪个归得程序员？
-
-/*
- 
- *********************************************************************************
- *
- * 在使用BAKit的过程中如果出现bug请及时以以下任意一种方式联系我，我会及时修复bug
- *
- * QQ     : 博爱1616【137361770】
- * 微博    : 博爱1616
- * Email  : 137361770@qq.com
- * GitHub : https://github.com/boai
- * 博客园  : http://www.cnblogs.com/boai/
- * 博客    : http://boai.github.io
- 
- *********************************************************************************
- 
- */
-
-
-/*!
- 
  最新更新时间：2016-12-06 【倒叙】
  最新Version：【Version：2.1 基于友盟 6.1.0 版本封装】
  更新内容：
@@ -84,42 +23,43 @@
 #define BASHAREMANAGER [BAShareManage ba_shareManage]
 
 /*! 友盟分享 SDK：接入自己项目时需要更改各个属性值 */
-#define BA_Umeng_Appkey     @"56f217d467e58e513a000434"
-#define BA_Sina_AppKey      @"2447331824"
-#define BA_SinaAppSecret    @"4ee72cf1958fa92b88570d1b99328718"
-#define BA_WX_APPKEY        @"wx19d8c52e02fa7556"
-#define BA_WX_APPSECRET     @"90eeb0c9ef2a1c99fb473890809f7f19"
-#define BA_QQKey            @"wrGGgg89e0lqqoXT"
-#define BA_QQAppID          @"1105285308"
+#define BA_Umeng_Appkey     @"5976f23a734be40aa000122d"
+#define BA_Sina_AppKey      @""
+#define BA_SinaAppSecret    @""
+#define BA_WX_APPKEY        @"wx001ae7eb613fd930"
+#define BA_WX_APPSECRET     @"9e985e0a893eb1ec018bc98f9f224870"
+#define BA_QQKey            @""
+#define BA_QQAppID          @""
+#define BA_ZhiFuBaoAppID    @""
 
-typedef NS_ENUM(NSUInteger, BAUM_SHARE_TYPE)
+typedef NS_ENUM(NSUInteger, BAKit_UMShareType)
 {
     /*! 纯文本 */
-    BAUM_SHARE_TYPE_TEXT = 1,
+    BAKit_UMShareType_Text = 1,
     
     /*! 纯图片：本地图片 */
-    BAUM_SHARE_TYPE_IMAGE,
+    BAKit_UMShareType_Image,
     
     /*! 纯图片：网络图片 URL */
-    BAUM_SHARE_TYPE_IMAGE_URL,
+    BAKit_UMShareType_Image_Url,
     
     /*! 网页：一般的分享是这种，title、content、缩略图、URL */
-    BAUM_SHARE_TYPE_WEB_LINK,
+    BAKit_UMShareType_Web_Link,
 
     /*! 文本 + 图片 【暂时只对新浪分享有效】 */
-    BAUM_SHARE_TYPE_TEXT_IMAGE,
+    BAKit_UMShareType_Text_Image,
 
     /*! 音乐 */
-    BAUM_SHARE_TYPE_MUSIC_LINK,
+    BAKit_UMShareType_Music_Link,
 
     /*! 视频 */
-    BAUM_SHARE_TYPE_VIDEO_LINK,
+    BAKit_UMShareType_Video_Link,
 
     /*! gif 动图【注：目前只有微信支持动图分享，其他平台均不支持】*/
-    BAUM_SHARE_TYPE_GIF,
+    BAKit_UMShareType_Gif,
 
     /*! 文件【注：目前只有微信支持动图分享，其他平台均不支持】 */
-    BAUM_SHARE_TYPE_FILE
+    BAKit_UMShareType_File
 };
 
 /*! 登录后返回的数据回调 */
@@ -131,7 +71,7 @@ typedef void (^BAUMLoginCallback)(UMSocialUserInfoResponse *response);
 @property (nonatomic, copy) BAUMLoginCallback loginCallback;
 
 /*! 分享类型 */
-@property (nonatomic, assign) BAUM_SHARE_TYPE shareType;
+@property (nonatomic, assign) BAKit_UMShareType shareType;
 
 /*! 分享标题 */
 @property (nonatomic, strong) NSString *shareTitle;
@@ -186,24 +126,29 @@ typedef void (^BAUMLoginCallback)(UMSocialUserInfoResponse *response);
 #pragma mark - 友盟分享 version 2.1
 /*! 微信分享 */
 #pragma mark 微信分享 version 2.1
-- (void)ba_wechatShareWithShareType:(BAUM_SHARE_TYPE)shareType
-                     viewController:(UIViewController *)viewController;
+- (void)ba_wechatShareWithShareType:(BAKit_UMShareType)shareType
+                     viewController:(UIViewController *)viewController
+                         completion:(UMSocialRequestCompletionHandler)completion;
 
 #pragma mark 微信朋友圈分享 version 2.1
-- (void)ba_wechatTimeLineShareWithShareType:(BAUM_SHARE_TYPE)shareType
-                             viewController:(UIViewController *)viewController;
+- (void)ba_wechatTimeLineShareWithShareType:(BAKit_UMShareType)shareType
+                             viewController:(UIViewController *)viewController
+                         completion:(UMSocialRequestCompletionHandler)completion;
 
 #pragma mark 新浪微博分享 version 2.1
-- (void)ba_sinaShareWithShareType:(BAUM_SHARE_TYPE)shareType
-                   viewController:(UIViewController *)viewController;
+- (void)ba_sinaShareWithShareType:(BAKit_UMShareType)shareType
+                   viewController:(UIViewController *)viewController
+                         completion:(UMSocialRequestCompletionHandler)completion;
 
 #pragma mark qq分享 version 2.1
-- (void)ba_qqShareWithShareType:(BAUM_SHARE_TYPE)shareType
-                 viewController:(UIViewController *)viewController;
+- (void)ba_qqShareWithShareType:(BAKit_UMShareType)shareType
+                 viewController:(UIViewController *)viewController
+                         completion:(UMSocialRequestCompletionHandler)completion;
 
 #pragma mark Qzone分享 version 2.1
-- (void)ba_qZoneShareWithShareType:(BAUM_SHARE_TYPE)shareType
-                    viewController:(UIViewController *)viewController;
+- (void)ba_qZoneShareWithShareType:(BAKit_UMShareType)shareType
+                    viewController:(UIViewController *)viewController
+                         completion:(UMSocialRequestCompletionHandler)completion;
 
 #pragma mark - 博爱友盟分享列表 version 2.1
 /*!
@@ -212,8 +157,9 @@ typedef void (^BAUMLoginCallback)(UMSocialUserInfoResponse *response);
  *  @param shareType      分享类型，具体看枚举
  *  @param viewController viewController
  */
-- (void)ba_shareListWithShareType:(BAUM_SHARE_TYPE)shareType
-                   viewController:(UIViewController *)viewController;
+- (void)ba_shareListWithShareType:(BAKit_UMShareType)shareType
+                   viewController:(UIViewController *)viewController
+                       completion:(UMSocialRequestCompletionHandler)completion;
 
 #pragma mark - 友盟登录
 #pragma mark 微信登录 version 2.1
@@ -253,4 +199,5 @@ typedef void (^BAUMLoginCallback)(UMSocialUserInfoResponse *response);
 #pragma mark - 清除授权
 - (void)ba_cancelAuthWithPlatformType:(UMSocialPlatformType)platformType;
 
+- (void)shareSuccussForServer;
 @end
